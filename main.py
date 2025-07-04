@@ -10,16 +10,8 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Your app is running..."}
 
-
-@app.post("/check-image")
-async def check_image(image: UploadFile):
-    timestamp = int(time.time())
-    file_location = f"storage/input_{timestamp}.png"
-    with open(file_location.format(timestamp=timestamp), "wb") as buffer:
-        shutil.copyfileobj(image.file, buffer)
-    return {"message": "Image successfully saved"}
 
 @app.post("/retrieve-ticket-number")
 async def check_image(image: UploadFile, token: str = Depends(token_checking)):
